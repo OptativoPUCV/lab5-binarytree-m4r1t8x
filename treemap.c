@@ -39,8 +39,6 @@ TreeNode * createTreeNode(void* key, void * value) {
 TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) {
 
     //new->lower_than = lower_than;
-    
-    
     TreeMap *new = (TreeMap *)malloc(sizeof(TreeMap));
     new->root = NULL;
     new->current = NULL;
@@ -49,7 +47,56 @@ TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) {
 }
 
 
-void insertTreeMap(TreeMap * tree, void* key, void * value) {
+void insertTreeMap(TreeMap * tree, void* key, void * value) 
+{
+    if (tree == NULL || key == NULL || value == NULL) return;
+    if (tree->root == NULL)
+    {
+        tree->root = createTreeNode(key, value);
+        tree->current = tree->root;
+    }
+    else
+    {
+        TreeNode *aux = tree->root;
+        while (aux != NULL)
+            {
+                if (is_equal(tree, key, aux->pair->key) == 1)
+                {
+                    return;
+                }
+                else
+                {
+                    if (tree->lower_than(key, aux->pair->key) == 1)
+                    {
+                        if (aux->left == NULL)
+                        {
+                            TreeNode *new = createTreeNode(key, value);
+                            new->parent = aux;
+                            aux->left = new;
+                            tree->current = new;
+                            return;
+                        }
+                        else
+                        {
+                            aux = aux->left;
+                        }
+                        
+                    }
+                    else
+                    {
+                        if (aux->right == NULL)
+                        {
+                            TreeNode *new = createTreeNode(key, value);
+                            new->parent = aux;
+                            aux->right = new;
+                            tree->current = new;
+                            return;
+                        }
+                        
+                    }
+                }
+            }
+    }
 
 }
 
