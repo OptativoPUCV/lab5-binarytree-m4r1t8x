@@ -114,3 +114,14 @@ Thu 09 May 2024 11:43:51 PM UTC:
  tests:  15|3
 total_score: 35/70
 930498a
+Sat 11 May 2024 10:14:50 PM UTC: 
+ treemap.c | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
+In file included from test.c:4:
+treemap.c: In function ‘upperBound’:
+treemap.c:174:15: error: variable ‘ub_node’ set but not used [-Werror=unused-but-set-variable]
+  174 |     TreeNode* ub_node = NULL;
+      |               ^~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+38662ce
